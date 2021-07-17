@@ -4,7 +4,6 @@ import { authService } from "fbase";
 
 function App() {
   const [init, setInit] = useState(false);
-  const [isSignIn, setIsSignIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   // console.log(authService.currentUser);
   // setInterval(() => {
@@ -14,10 +13,7 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if(user) {
-        setIsSignIn(true);
         setUserObj(user);
-      } else {  
-        setIsSignIn(false);
       }
       setInit(true);
     });
@@ -25,7 +21,7 @@ function App() {
 
   return (
     <>
-      {init ? <AppRouter isSignIn={isSignIn} userObj={userObj} />  : "Initializing..."}
+      {init ? <AppRouter isSignIn={Boolean(userObj)} userObj={userObj} />  : "Initializing..."}
       <footer>&copy; firebaseBasic {new Date().getFullYear()}</footer>
     </>
   );
