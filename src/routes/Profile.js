@@ -1,10 +1,17 @@
 import React from 'react';
+import { authService } from 'fbase';
+import { useHistory } from 'react-router-dom';
 
 const Profile = () => {
+    const history = useHistory();
+    const onSignOutClick = () => {
+        authService.signOut();
+        history.push("/");
+    }
     return (
-        <div>
-            Profile
-        </div>
+        <>
+            <button onClick={onSignOutClick}>Sign Out</button>
+        </>
     );
 };
 
