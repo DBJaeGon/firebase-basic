@@ -6,7 +6,7 @@ import { v4 as uuidv4} from 'uuid';
 const Home = ({ userObj }) => {
     const [nweet, setNweet] = useState("");
     const [nweets, setNweets] = useState([]);
-    const [attachment, setAttachment] = useState();
+    const [attachment, setAttachment] = useState("");
     const fileInput = useRef();
     // const getNweets = async() => {
     //     const dbNweets = await dbService.collection("nweets").get();
@@ -32,7 +32,7 @@ const Home = ({ userObj }) => {
     const onSubmit = async(event) => {
         event.preventDefault();
         let attachmentUrl = "";
-        if(attachment !== null) {
+        if(attachment !== "") {
             const attachmentRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
             const response = await attachmentRef.putString(attachment, "data_url");
             attachmentUrl = await response.ref.getDownloadURL();
@@ -50,7 +50,7 @@ const Home = ({ userObj }) => {
         //     creatorId: userObj.uid
         // });
         setNweet("");
-        setAttachment(null);
+        setAttachment("");
         fileInput.current.value = "";
     };
     const onChange =(event) => {
@@ -68,7 +68,7 @@ const Home = ({ userObj }) => {
         reader.readAsDataURL(theFile);
     };
     const onClearAttachment = () => {
-        setAttachment(null);
+        setAttachment("");
         fileInput.current.value = "";
     }
     return (
