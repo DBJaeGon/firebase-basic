@@ -19,6 +19,8 @@ function App() {
           uid: user.uid,
           updateProfile: (args) => user.updateProfile(args)
         });
+      } else {
+        setUserObj(null);
       }
       setInit(true);
     });
@@ -37,7 +39,6 @@ function App() {
   return (
     <>
       {init ? <AppRouter isSignIn={Boolean(userObj)} userObj={userObj} refreshUser={refreshUser} />  : "Initializing..."}
-      <footer>&copy; firebaseBasic {new Date().getFullYear()}</footer>
     </>
   );
 }
