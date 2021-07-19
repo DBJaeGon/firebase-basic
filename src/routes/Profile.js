@@ -5,14 +5,12 @@ import { useHistory } from 'react-router-dom';
 const Profile = ({ userObj, refreshUser }) => {
     const history = useHistory();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-    const onSignOutClick = () => {
-        authService.signOut();
-        history.push("/");
-    }
+
     const getMyNweets = async() => {
         const nweets = await dbService.collection("nweets").where("creatorId", "==", userObj.uid).orderBy("createdAt", "desc").get();
         console.log(nweets.docs.map(doc => doc.data()));
     };
+
     useEffect(() => {
         getMyNweets();  
     }, []);
@@ -29,14 +27,22 @@ const Profile = ({ userObj, refreshUser }) => {
         }
         refreshUser();
     };
+
+    const onSignOutClick = () => {
+        authService.signOut();
+        history.push("/");
+    };
+    
     return (
-        <>
-            <form onSubmit={onSubmit}>
-                <input type="text" placeholder="display Name" value={newDisplayName} onChange={onChange} />
-                <input type="submit" value="Update Profile" />
+        <div className="container">
+            <form onSubmit={onSubmit} className="profileForm">
+                <input type="text" placeholder="display Name" value={newDisplayName} onChange={onChange} autoFocus className="formInput" />
+                <input type="submit" value="Update Profile" className="formBtn" style={{ marginTop: 10 }} />
             </form>
-            <button onClick={onSignOutClick}>Sign Out</button>
-        </>
+            <span className="formBtn cancelBtn logOut" onClick={onSignOutClick}>
+                Sign Out
+            </span>
+        </div>
     );
 };
 
