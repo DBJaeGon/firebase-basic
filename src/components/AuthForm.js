@@ -19,13 +19,21 @@ const AuthForm = () => {
     const onSubmit = async(event) => {
         event.preventDefault();
         try {
-            let data;
             if(newAccount) {
-                data = await authService.createUserWithEmailAndPassword(email, password);
+                await authService.createUserWithEmailAndPassword(email, password);
+                await authService.currentUser.sendEmailVerification();
+                window.alert("email에서 인증메일을 통해 가입을 완료해 주세요!");
+                setEmail("");
+                setPassword("");
             } else {
-                data = await authService.signInWithEmailAndPassword(email, password);
+                await authService.signInWithEmailAndPassword(email, password);
+                const verified = await authService.currentUser.emailVerified;
+                if(!verified) {
+                    const again = window.confirm("email 인증이 필요합니다.\n인증 메일이 안보인다면 확인을 눌러주세요!");
+                    if(again) await authService.currentUser.sendEmailVerification();
+                    authService.signOut();
+                }
             }
-            console.log(data);
         } catch (error) {
             setError(error.message);
         }

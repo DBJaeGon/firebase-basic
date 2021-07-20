@@ -14,11 +14,15 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if(user) {
         // setUserObj(user);
-        setUserObj({
-          displayName: user.displayName,
-          uid: user.uid,
-          updateProfile: (args) => user.updateProfile(args)
-        });
+        if(!user.emailVerified) {
+          setUserObj(null);
+        } else {
+          setUserObj({
+            displayName: user.displayName,
+            uid: user.uid,
+            updateProfile: (args) => user.updateProfile(args)
+          });
+        }
       } else {
         setUserObj(null);
       }
