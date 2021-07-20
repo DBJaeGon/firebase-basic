@@ -14,7 +14,7 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if(user) {
         // setUserObj(user);
-        if(!user.emailVerified) {
+        if(user.providerData[0].providerId === "password" && !user.emailVerified) {
           setUserObj(null);
         } else {
           setUserObj({

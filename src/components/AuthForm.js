@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { authService } from 'fbase';
 
-const AuthForm = () => {
+const AuthForm = ({ authError }) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -25,6 +25,7 @@ const AuthForm = () => {
                 window.alert("email에서 인증메일을 통해 가입을 완료해 주세요!");
                 setEmail("");
                 setPassword("");
+                authService.signOut();
             } else {
                 await authService.signInWithEmailAndPassword(email, password);
                 const verified = await authService.currentUser.emailVerified;
@@ -45,7 +46,7 @@ const AuthForm = () => {
                 <input name="email" type="text" placeholder="Email" required value={email} onChange={onChange} className="authInput" />
                 <input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} className="authInput" />
                 <input type="submit" value={newAccount ? "Create Account" : "Sign In"} className="authInput authSubmit" />
-            {error && <span className="authError">{error}</span>}
+            {(error || authError) && <span className="authError">{(error || authError)}</span>}
             </form>
             <span onClick={toggleAccount} className="authSwitch">
                 {newAccount ? "Sign In" : "Create Account"}
