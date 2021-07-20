@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/firebase-basic/static/css/main.0040c171.chunk.css",
+    "main.css": "/firebase-basic/static/css/main.1552fe30.chunk.css",
     "main.js": "/firebase-basic/static/js/main.fc3a906c.chunk.js",
     "main.js.map": "/firebase-basic/static/js/main.fc3a906c.chunk.js.map",
     "runtime-main.js": "/firebase-basic/static/js/runtime-main.ea81e890.js",
@@ -8,13 +8,13 @@
     "static/js/2.79c5d4eb.chunk.js": "/firebase-basic/static/js/2.79c5d4eb.chunk.js",
     "static/js/2.79c5d4eb.chunk.js.map": "/firebase-basic/static/js/2.79c5d4eb.chunk.js.map",
     "index.html": "/firebase-basic/index.html",
-    "static/css/main.0040c171.chunk.css.map": "/firebase-basic/static/css/main.0040c171.chunk.css.map",
+    "static/css/main.1552fe30.chunk.css.map": "/firebase-basic/static/css/main.1552fe30.chunk.css.map",
     "static/js/2.79c5d4eb.chunk.js.LICENSE.txt": "/firebase-basic/static/js/2.79c5d4eb.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ea81e890.js",
     "static/js/2.79c5d4eb.chunk.js",
-    "static/css/main.0040c171.chunk.css",
+    "static/css/main.1552fe30.chunk.css",
     "static/js/main.fc3a906c.chunk.js"
   ]
 }
